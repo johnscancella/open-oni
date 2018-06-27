@@ -8,8 +8,8 @@ from django.db.models import Min, Max
 
 from core import models
 
-MIN_YEAR = 1860
-MAX_YEAR = 1922
+MIN_YEAR = 1700
+MAX_YEAR = 2000
 DAY_CHOICES = [(i, i) for i in range(1,32)]
 MONTH_CHOICES = ((1, u'Jan',), (2, u'Feb',), (3, u'Mar',),
                  (4, u'Apr',), (5, u'May',), (6, u'Jun',),
