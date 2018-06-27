@@ -10,14 +10,14 @@ services:
       - MYSQL_PASSWORD=openoni
     volumes:
       - ./conf/mysql/:/etc/mysql/conf.d:Z
-      - data-mariadb:/var/lib/mysql
+      - /srv/data/mysql-data:/var/lib/mysql
     ports:
       - "$RDBMSPORT:3306"
   solr:
     image: solr:6.6
     volumes:
       - ./docker/solr/:/tmp/solr:Z
-      - data-solr:/opt/solr
+      - /srv/data/solr-data:/opt/solr/data
     entrypoint:
       - docker-entrypoint.sh
       - /tmp/solr/precreate
@@ -29,14 +29,14 @@ services:
       - RAIS_IIIFURL=$APP_URL:$HTTPPORT/images/iiif
       - RAIS_TILECACHELEN=250
     volumes:
-      - ./docker/data/batches:/var/local/images:z
+      - /srv/data/chronam-data/batches:/var/local/images:z
   web:
     build:
       context: ./docker
       dockerfile: Dockerfile-dev
     volumes:
       - ./:/opt/openoni:Z
-      - ./docker/data:/opt/openoni/data:z
+      - /srv/data/chronam-data:/opt/openoni/data:z
     ports:
       - "$HTTPPORT:80"
     depends_on:
@@ -49,6 +49,3 @@ services:
       - APP_URL
       - HTTPPORT
       - APACHE_LOG_LEVEL
-volumes:
-  data-mariadb: {}
-  data-solr: {}

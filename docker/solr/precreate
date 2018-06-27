@@ -35,4 +35,8 @@ rm -f $coredir/conf/managed-schema
 cp /tmp/solr/schema.xml $coredir/conf/schema.xml
 cp /tmp/solr/solrconfig.xml $coredir/conf/solrconfig.xml
 
+if [[ ! -d /opt/solr/server/solr/mycores/openoni/data ]]; then
+  ln -s /opt/solr/data /opt/solr/server/solr/mycores/openoni/data
+fi
+
 exec solr -f
