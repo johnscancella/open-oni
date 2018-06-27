@@ -25,6 +25,9 @@ class Command(BaseCommand):
 
             logger.info("Deleting titles_states cache...")
             cache.delete('titles_states')
+
+            logger.info("Delete fulltext range cache...")
+            cache.delete('fulltext_range')
         except Exception, e:
             logger.exception(e)
             raise CommandError("Unable to delete newspaper info and title state cache")
